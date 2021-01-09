@@ -83,7 +83,7 @@ RUN git clone https://github.com/FFmpeg/FFmpeg.git ffmpeg \
 	&& cd ffmpeg \
 	&& git checkout n$FFMPEG_VERSION \
 	&& export LIBVA_DRIVERS_PATH=/usr/local/lib/dri/iHD_drv_video.so \
-	&& export export LIBVA_DRIVER_NAME=iHD \
+	&& export LIBVA_DRIVER_NAME=iHD \
 	&& export LD_LIBRARY_PATH=/opt/intel/mediasdk/lib64 \
 	&& export PKG_CONFIG_PATH=/opt/intel/mediasdk/lib64/pkgconfig \
 	&& ./configure --arch=x86_64 --disable-yasm --enable-vaapi --enable-libmfx \
