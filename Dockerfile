@@ -13,7 +13,7 @@ ENV INTEL_MEDIA_SDK_VERSION=20.5.1
 ENV FFMPEG_VERSION=4.3.1
 
 RUN apk update
-RUN apk add --virtual build-dependencies \
+RUN apk add \
 	alpine-sdk \
 	autoconf \
 	automake \
@@ -79,13 +79,14 @@ RUN git clone https://github.com/Intel-Media-SDK/MediaSDK.git msdk \
 	&& make install
 
 # Get FFmpeg, compile and install
+ENV LIBVA_DRIVERS_PATH=/usr/local/lib/dri/iHD_drv_video.so
+ENV LIBVA_DRIVER_NAME=iHD
+ENV LD_LIBRARY_PATH=/opt/intel/mediasdk/lib64
+ENV PKG_CONFIG_PATH=/opt/intel/mediasdk/lib64/pkgconfig
+
 RUN git clone https://github.com/FFmpeg/FFmpeg.git ffmpeg \
 	&& cd ffmpeg \
 	&& git checkout n$FFMPEG_VERSION \
-	&& export LIBVA_DRIVERS_PATH=/usr/local/lib/dri/iHD_drv_video.so \
-	&& export LIBVA_DRIVER_NAME=iHD \
-	&& export LD_LIBRARY_PATH=/opt/intel/mediasdk/lib64 \
-	&& export PKG_CONFIG_PATH=/opt/intel/mediasdk/lib64/pkgconfig \
 	&& ./configure --arch=x86_64 --disable-yasm --enable-vaapi --enable-libmfx \
 	&& make -j"$(nproc)" \
 	&& make install
