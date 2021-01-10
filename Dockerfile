@@ -89,6 +89,7 @@ RUN git clone https://github.com/FFmpeg/FFmpeg.git ffmpeg \
 	&& cd ffmpeg \
 	&& git checkout n$FFMPEG_VERSION \
 	&& ./configure --arch=x86_64 --disable-yasm --enable-vaapi --enable-libmfx \
+		--enable-gpl --enable-libx264 \
 	&& make -j"$(nproc)" \
 	&& make install
 
