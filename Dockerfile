@@ -13,14 +13,15 @@ ENV INTEL_MEDIA_SDK_VERSION=20.5.1
 ENV FFMPEG_VERSION=4.3.1
 
 RUN apk update
-RUN apk add \
+RUN apk add --virtual build-dependencies\
 	alpine-sdk \
 	autoconf \
 	automake \
-	bzip2-dev \
 	curl \
 	cmake \
-	git \
+	git
+RUN apk add \
+	bzip2-dev \
 	lame-dev \
 	libass-dev \
 	libdrm-dev \
@@ -90,3 +91,6 @@ RUN git clone https://github.com/FFmpeg/FFmpeg.git ffmpeg \
 	&& ./configure --arch=x86_64 --disable-yasm --enable-vaapi --enable-libmfx \
 	&& make -j"$(nproc)" \
 	&& make install
+
+# Remove build dependencies
+RUN apk del build-dependencies
