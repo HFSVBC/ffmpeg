@@ -94,3 +94,5 @@ RUN git clone https://github.com/FFmpeg/FFmpeg.git ffmpeg \
 
 # Remove build dependencies
 RUN apk del build-dependencies
+RUN rm -rf /tmp/*
+WORKDIR /
