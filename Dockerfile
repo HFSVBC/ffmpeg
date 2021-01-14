@@ -120,3 +120,39 @@ RUN git clone https://github.com/FFmpeg/FFmpeg.git ffmpeg \
     --disable-debug --disable-yasm --enable-libmfx \
 	&& make -j"$(nproc)" \
 	&& make install
+
+# Cleanup
+WORKDIR /
+
+RUN rm -rf /tmp/*
+RUN rm -rf \
+  /usr/lib/libva*.la \
+  /opt/intel/mediasdk/lib64/*.la \
+  /opt/intel/mediasdk/include \
+  /opt/intel/mediasdk/lib64/pkgconfig
+
+RUN apk del build-dependencies
+RUN apk add \
+  alsa-lib \
+  aom \
+  bzip2 \
+  dav1d \
+  gnutls \
+  lame \
+  libass \
+  libdrm \
+  libssh \
+  libtheora \
+  libvdpau \
+  libvorbis \
+  libvpx \
+  libxcb \
+  opus \
+  sdl2 \
+  soxr \
+  v4l-utils \
+  vulkan-loader \
+  x264-dev \
+  x265 \
+  xvidcore \
+  zlib
