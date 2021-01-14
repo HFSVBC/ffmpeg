@@ -111,7 +111,7 @@ ENV PKG_CONFIG_PATH=/opt/intel/mediasdk/lib64/pkgconfig
 RUN git clone https://github.com/FFmpeg/FFmpeg.git ffmpeg \
 	&& cd ffmpeg \
 	&& git checkout n$FFMPEG_VERSION \
-	&& ./configure--enable-avresample --enable-avfilter \
+	&& ./configure --enable-avresample --enable-avfilter \
     --enable-gnutls --enable-gpl --enable-libass --enable-libmp3lame --enable-libvorbis \
     --enable-libvpx --enable-libxvid --enable-libx264 --enable-libx265 --enable-libtheora \
     --enable-libv4l2 --enable-libdav1d --enable-postproc --enable-pic --enable-pthreads \
